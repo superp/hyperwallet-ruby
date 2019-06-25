@@ -17,7 +17,7 @@ module Hyperwallet
     end
 
     def self.update(key, params)
-      res = Hyperwallet.request(:put, "/users/#{key}", MultiJson.dump(params))
+      res = Hyperwallet.request(:put, "/users/#{key}", params)
       convert_to_hyperwallet_object(res, User)
     end
 

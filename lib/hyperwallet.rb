@@ -13,7 +13,7 @@ require "hyperwallet/payment"
 module Hyperwallet
 
   class << self
-    attr_accessor :api_user, :api_password, :api_base
+    attr_accessor :api_user, :api_password, :api_base, :debug
   end
 
   def self.api_url(operation='', api_version = 3)
@@ -23,16 +23,13 @@ module Hyperwallet
   def self.request(method, url, params = {}, headers = {}, api_version = 3)
     http_method = method.to_s.downcase.to_sym
     case http_method
-    when :get, :head, :delete
+    when :post, :put
+      headers[:content_type] ||= "application/json"
+      payload = params.to_json
+    else
       # Make params into GET parameters
       url += "#{URI.parse(url).query ? '&' : '?'}#{uri_encode(params)}" if params && params.any?
       payload = nil
-    else
-      payload = params.is_a?(String) ? params : uri_encode(params)
-      if http_method == :post
-        payload = params.to_json
-        headers[:content_type] ||= "application/json"
-      end
     end
 
     request_opts = {
@@ -59,6 +56,7 @@ module Hyperwallet
   end
 
   def self.execute_request(opts)
+    puts "REQUEST: #{opts.to_s}" if debug
     RestClient::Request.execute(opts)
   end
 
@@ -75,6 +73,7 @@ module Hyperwallet
 
   def self.parse(response)
     begin
+      puts "RESPONSE: #{response.body}" if debug
       response = MultiJson.load(response.body)
     rescue MultiJson::DecodeError
       raise APIError.new("Invalid response from the API: #{response.body.inspect}")
