@@ -28,4 +28,12 @@ class TestData
     }
   end
 
+  def self.paypal_account
+    {
+      type: 'PAYPAL_ACCOUNT',
+      transferMethodCountry: 'US',
+      transferMethodCurrency: 'USD',
+      email: 'jdoe@hyperwallet.com'
+    }
+  end
 end

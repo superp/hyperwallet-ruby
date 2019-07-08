@@ -9,6 +9,7 @@ require "hyperwallet/util"
 require "hyperwallet/hyperwallet_object"
 require "hyperwallet/user"
 require "hyperwallet/payment"
+require "hyperwallet/paypal_account"
 
 module Hyperwallet
 
