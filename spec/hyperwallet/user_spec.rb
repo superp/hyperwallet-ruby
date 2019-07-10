@@ -41,4 +41,13 @@ describe Hyperwallet::User do
     end
   end
 
+  describe ".balances" do
+    it "should call the api" do
+      expect(api).to receive(:get)
+        .with(Hyperwallet.api_url("/users/user_token_1/balances"), nil, nil)
+        .and_return(test_response(user))
+      Hyperwallet::User.balances("user_token_1")
+    end
+  end
+
 end

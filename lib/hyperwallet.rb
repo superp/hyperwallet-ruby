@@ -84,7 +84,7 @@ module Hyperwallet
   private
 
   def self.uri_encode(params)
-    params.map { |k,v| "#{k}=#{URI.escape(v)}" }.join("&")
+    params.map { |k,v| "#{k}=#{URI.escape(v.to_s)}" }.join("&")
   end
 
 end

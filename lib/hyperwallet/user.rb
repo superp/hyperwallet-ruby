@@ -21,5 +21,10 @@ module Hyperwallet
       convert_to_hyperwallet_object(res, User)
     end
 
+    def self.balances(key, params={})
+      res = Hyperwallet.request(:get, "/users/#{key}/balances", params)
+      convert_to_hyperwallet_object(res)
+    end
+
   end
 end
