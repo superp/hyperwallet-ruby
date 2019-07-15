@@ -44,7 +44,7 @@ module Hyperwallet
     }
     begin
       response = execute_request(request_opts)
-      handle_api_error(response.code, response.body) unless [200, 201].include?(response.code.to_i)
+      handle_api_error(response.code, response.body) unless [200, 201, 204].include?(response.code.to_i)
     rescue RestClient::ExceptionWithResponse => e
       if rcode = e.http_code and rbody = e.http_body
         handle_api_error(rcode, rbody)
@@ -73,11 +73,16 @@ module Hyperwallet
   end
 
   def self.parse(response)
-    begin
-      puts "RESPONSE: #{response.body}" if debug
-      response = MultiJson.load(response.body)
-    rescue MultiJson::DecodeError
-      raise APIError.new("Invalid response from the API: #{response.body.inspect}")
+    puts "RESPONSE: #{response.body}" if debug
+
+    if response.body.present?
+      begin
+        MultiJson.load(response.body)
+      rescue MultiJson::DecodeError
+        raise APIError.new("Invalid response from the API: #{response.body.inspect}")
+      end
+    else
+      {}
     end
   end
 
