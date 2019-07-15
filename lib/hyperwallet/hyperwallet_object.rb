@@ -33,13 +33,16 @@ module Hyperwallet
       object = self.new(values)
     end
 
-    def method_missing(name, *args)
+    def method_missing(name, *args, &block)
       if @values.has_key?(name)
         @values[name]
       else
         super
       end
     end
+
+    def respond_to_missing?(name, *args)
+      @values.has_key?(name) || super
+    end
   end
 end
-
