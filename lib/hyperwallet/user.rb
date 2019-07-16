@@ -26,5 +26,29 @@ module Hyperwallet
       convert_to_hyperwallet_object(res)
     end
 
+    class PaypalAccount < HyperwalletObject
+
+      def self.all(user_token, params)
+        res = Hyperwallet.request(:get, "/users/#{user_token}/paypal-accounts", params)
+        convert_to_hyperwallet_object(res, PaypalAccount)
+      end
+
+      def self.find(user_token, account_token)
+        res = Hyperwallet.request(:get, "/users/#{user_token}/paypal-accounts/#{account_token}")
+        convert_to_hyperwallet_object(res, PaypalAccount)
+      end
+
+      def self.create(user_token, params)
+        res = Hyperwallet.request(:post, "/users/#{user_token}/paypal-accounts", params)
+        convert_to_hyperwallet_object(res, PaypalAccount)
+      end
+
+      def self.update(user_token, account_token, params)
+        res = Hyperwallet.request(:put, "/users/#{user_token}/paypal-accounts/#{account_token}", params)
+        convert_to_hyperwallet_object(res, PaypalAccount)
+      end
+
+    end
+
   end
 end

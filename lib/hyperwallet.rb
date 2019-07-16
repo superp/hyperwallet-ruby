@@ -9,7 +9,7 @@ require "hyperwallet/util"
 require "hyperwallet/hyperwallet_object"
 require "hyperwallet/user"
 require "hyperwallet/payment"
-require "hyperwallet/paypal_account"
+require "hyperwallet/program"
 
 module Hyperwallet
 
@@ -74,15 +74,12 @@ module Hyperwallet
 
   def self.parse(response)
     puts "RESPONSE: #{response.body}" if debug
+    return {} if response.body.empty?
 
-    if response.body.present?
-      begin
-        MultiJson.load(response.body)
-      rescue MultiJson::DecodeError
-        raise APIError.new("Invalid response from the API: #{response.body.inspect}")
-      end
-    else
-      {}
+    begin
+      MultiJson.load(response.body)
+    rescue MultiJson::DecodeError
+      raise APIError.new("Invalid response from the API: #{response.body.inspect}")
     end
   end
 

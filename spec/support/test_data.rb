@@ -36,4 +36,18 @@ class TestData
       email: 'jdoe@hyperwallet.com'
     }
   end
+
+  def self.program
+    {
+      token: "prg-#{SecureRandom.uuid}",
+      name: 'Hyperwallet Program'
+    }
+  end
+
+  def self.account
+    {
+      currency: 'USD',
+      amount: '100000.00'
+    }
+  end
 end
