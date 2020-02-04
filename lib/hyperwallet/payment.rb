@@ -1,8 +1,8 @@
 module Hyperwallet
   class Payment < HyperwalletObject
 
-    def self.all
-      res = Hyperwallet.request(:get, '/payments')
+    def self.all(params={})
+      res = Hyperwallet.request(:get, '/payments', params)
       convert_to_hyperwallet_object(res, Payment)
     end
 
