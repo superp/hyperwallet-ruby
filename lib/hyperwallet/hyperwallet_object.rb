@@ -1,5 +1,6 @@
 module Hyperwallet
   class HyperwalletObject
+    attr_reader :values
 
     def initialize(values)
       @values = {}
