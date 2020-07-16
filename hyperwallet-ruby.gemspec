@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hyperwallet/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "hyperwallet-ruby"
+  spec.name          = "superp-hyperwallet-ruby"
   spec.version       = Hyperwallet::VERSION
   spec.authors       = ["Troy Martin"]
   spec.email         = ["troy@devatotech.com"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Ruby bindings for the Hyperwallet REST API.}
   spec.description   = %q{Ruby bindings for the Hyperwallet REST API.}
-  spec.homepage      = "https://github.com/Devato/hyperwallet-ruby"
+  spec.homepage      = "https://github.com/superp/hyperwallet-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
