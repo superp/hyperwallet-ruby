@@ -26,7 +26,7 @@ module Hyperwallet
       convert_to_hyperwallet_object(res)
     end
     
-    def self.auth_token(key, params)
+    def self.auth_token(key)
       res = Hyperwallet.request(:post, "/users/#{key}/authentication-token")
       convert_to_hyperwallet_object(res)
     end
