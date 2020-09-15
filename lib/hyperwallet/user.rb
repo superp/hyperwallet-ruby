@@ -25,6 +25,11 @@ module Hyperwallet
       res = Hyperwallet.request(:get, "/users/#{key}/balances", params)
       convert_to_hyperwallet_object(res)
     end
+    
+    def self.auth_token(key, params)
+      res = Hyperwallet.request(:post, "/users/#{key}/authentication-token")
+      convert_to_hyperwallet_object(res)
+    end
 
     class PaypalAccount < HyperwalletObject
 
