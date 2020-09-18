@@ -25,9 +25,14 @@ module Hyperwallet
       res = Hyperwallet.request(:get, "/users/#{key}/balances", params)
       convert_to_hyperwallet_object(res)
     end
-    
+
     def self.auth_token(key)
       res = Hyperwallet.request(:post, "/users/#{key}/authentication-token")
+      convert_to_hyperwallet_object(res)
+    end
+
+    def self.find_bank_account(user_token, trm_token)
+      res = Hyperwallet.request(:get, "/users/#{user_token}/bank-accounts/#{trm_token}")
       convert_to_hyperwallet_object(res)
     end
 
